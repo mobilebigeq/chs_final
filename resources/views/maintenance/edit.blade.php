@@ -92,9 +92,11 @@
 
                             <div class="col-md-6">
                                 <select id="due_date" type="text" class="form-control" name="due_date" value="{{ old('due_date') }}" required autofocus>
-                                <option value="{{$maintenances->due_date}}">{{$maintenances->due_date}}</option>
-                                @for($i=0;$i < 31;$i++)
-                                <option value="{{$i}}">{{$i}}</option>
+                                <!-- <option value="{{$maintenances->due_date}}">{{$maintenances->due_date}}</option> -->
+                                @for($i=1;$i <= 30;$i++)
+
+                                <option @if($maintenances->due_date == $i)                                 {{"selected"}}
+                                @endif value="{{$i}}">{{$i}}</option>
                                 @endfor
                                 </select>
                                 @if ($errors->has('due_date'))

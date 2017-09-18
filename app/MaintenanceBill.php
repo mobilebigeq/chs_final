@@ -11,9 +11,5 @@ class MaintenanceBill extends Model
     	return $this->belongsTo(Flat::class,'flat_id');
     }
 
-    public function flats_method_no(){
-
-    	return $this->belongsTo(Flat::class,'flat_id');
-    }
 
 }

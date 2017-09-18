@@ -58,10 +58,11 @@ class MaintenanceBillController extends Controller
 
     public function store(Request $request){
 
-         $society = Society::all()->pluck('society_name')->first();
+         $society = Society::where('id',Auth::user()->society_id)->pluck('society_name')->first();
 
 
         $maintenanceAmount = Maintenance::where('society_id',Auth::user()->society_id)->first();
+
 
         $amount = $maintenanceAmount->amount;
         $flats = Flat::where('society_id',Auth::user()->society_id)->get();

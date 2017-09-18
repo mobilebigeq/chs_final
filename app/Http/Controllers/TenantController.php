@@ -121,6 +121,7 @@ class TenantController extends Controller
     
             }
         $tenants->agreement_copy = $url_agc;
+        
 
 
          if(Input::hasFile('police_verification')){

@@ -36,7 +36,34 @@
                             </div>
 
                         </div>
-                         
+                        
+                        <div id="generated_label" class="form-group" style="display: none;">
+                            <div class="col-md-6 col-md-offset-4">
+                                <label>Bill has been generated for this month. Are you sure you want to proceed?</label>
+                            </div>
+
+                            
+                            <div class="col-md-6 col-md-offset-4">
+                                 <form class="form-horizontal" method="POST" action="{{url('/store_maintenance_bill') }}">
+                                 {{ csrf_field() }}
+
+                          <div class="form-group">
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-success btn-large btn-block">
+                                    <i class="fa fa-btn fa-ticket"></i>Proceed
+                                </button>
+                            </div>
+                        </div>
+    
+                    </form>
+
+                                <button type="submit" class="btn btn-danger btn-large btn-block"><a href="{{ url('show_maintenance_bills')}}">
+                                    <i class="fa fa-btn fa-ticket"></i>Cancel</a>
+                                </button> 
+                                
+                            </div>
+                        </div>
+                        
                         @else
                          <form class="form-horizontal" method="POST" action="{{url('/store_maintenance_bill') }}">
                         {{ csrf_field() }}
@@ -59,5 +86,19 @@
     </div>
 </div>
 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js">
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+
+        $('#bill_button_click').click(function() {
+
+            $('#generated_label').show();
+            $('#bill_button_click').hide();
+        })
+
+    })
+</script>
 @endsection
 

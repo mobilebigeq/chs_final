@@ -55,7 +55,7 @@ ul.custom-class{
         height: 100%;
 }
 .list-group{
-    height: 700px;
+    height: 900px;
 }
 
 .list-group-item{
@@ -98,5 +98,8 @@ ul.custom-class{
     top: 0;
 }
 
-
+input[type='file']{
+  /*color:blue;
+  font-size:25px;*/
+}
 
