@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddColumnSocietyTable extends Migration
+class AddColumnMaintenanceBillsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class AddColumnSocietyTable extends Migration
      */
     public function up()
     {
-        // Schema::table('societies', function (Blueprint $table) {
-        //     $table->string('office_number')->after('address');
-        // });
+        Schema::table('maintenance_bills', function (Blueprint $table) {
+            $table->string('month_year')->after('amount');
+        });
     }
 
     /**
@@ -25,7 +25,7 @@ class AddColumnSocietyTable extends Migration
      */
     public function down()
     {
-        Schema::table('societies', function (Blueprint $table) {
+        Schema::table('maintenance_bills', function (Blueprint $table) {
             //
         });
     }

@@ -50,16 +50,17 @@
                           <div class="form-group">
                             <div class="col-md-12">
                                 <button type="submit" class="btn btn-success btn-large btn-block">
-                                    <i class="fa fa-btn fa-ticket"></i>Proceed
+                                Proceed
                                 </button>
                             </div>
                         </div>
     
                     </form>
 
-                                <button type="submit" class="btn btn-danger btn-large btn-block"><a href="{{ url('show_maintenance_bills')}}">
-                                    <i class="fa fa-btn fa-ticket"></i>Cancel</a>
-                                </button> 
+                            <div>
+                            <a href="{{ url('show_maintenance_bills') }}" class="btn btn-danger btn-large btn-block">
+                            Cancel</a>
+                            </div> 
                                 
                             </div>
                         </div>

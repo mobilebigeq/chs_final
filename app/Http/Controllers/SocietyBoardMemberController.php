@@ -50,10 +50,9 @@ class SocietyBoardMemberController extends Controller
     	$societyboardmembers = SocietyBoardMember::find($id);
 
     	$societymembers = SocietyMember::where('society_id',Auth::user()->society_id)->get();
+ 	
 
-		$societymembers_selected = SocietyMember::find($societyboardmembers->society_members_id);    	
-
-    	return view('societyboardmember.edit',compact('societyboardmembers','societymembers','societymembers_selected'));
+    	return view('societyboardmember.edit',compact('societyboardmembers','societymembers'));
     }
 
 

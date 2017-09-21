@@ -55,12 +55,12 @@ class FlatController extends Controller
 
     	$societymembers = SocietyMember::where('society_id',Auth::user()->society_id)->get();
 
-    	$societymember_selected = SocietyMember::find($flats->society_members_id);
 
-        $tenants = Tenant::all();
-        $tenants_selected = Tenant::find($flats->tenants_id);
+        $tenants = Tenant::where('society_id',Auth::user()->society_id)
+                    ->get();
+        
 
-    	return view('flat.edit',compact('flats','societymembers','societymember_selected','tenants','tenants_selected'));
+    	return view('flat.edit',compact('flats','societymembers','tenants'));
     }
 
     public function update(Request $request, $id){

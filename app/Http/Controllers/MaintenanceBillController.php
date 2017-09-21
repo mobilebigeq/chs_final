@@ -77,6 +77,7 @@ class MaintenanceBillController extends Controller
         $maintenanceBills->society_id = Auth::user()->society_id;
         $maintenanceBills->flat_id = $flat->id;
         $maintenanceBills->amount = $total_bill;
+        $maintenanceBills->month_year = date("M-Y");
         $maintenanceBills->bill_number = $bill_number;
         $maintenanceBills->extra_charge;
         $maintenanceBills->charge_name;
@@ -95,9 +96,7 @@ class MaintenanceBillController extends Controller
 
         $flats = Flat::where('society_id',Auth::user()->society_id)->get();
 
-        $flats_selected = Flat::find($maintenanceBills->flat_id);
-
-        return view('maintenanceBill.edit',compact('maintenanceBills','flats','flats_selected'));
+        return view('maintenanceBill.edit',compact('maintenanceBills','flats'));
     }
 
     public function update(Request $request, $id){
@@ -107,12 +106,13 @@ class MaintenanceBillController extends Controller
             'flat_id' => 'required',
             'bill_number' => 'required',
             'amount' => 'required',
+            'month_year' => 'required',
             ]);
 
         $maintenanceBills = MaintenanceBill::find($id);
         $maintenanceBills->society_id = Auth::user()->society_id;
         $maintenanceBills->flat_id = $request->input('flat_id');
-        
+        $maintenanceBills->month_year = $request->input('month_year');
         $maintenanceBills->extra_charge = $request->input('extra_charge');
         
         if($request->input('extra_charge') == 'Yes'){
@@ -164,11 +164,22 @@ class MaintenanceBillController extends Controller
 
      public function download($id){
 
-        $maintenanceBills = MaintenanceBill::find($id);
+
+        $maintenanceBills = DB::table('maintenance_bills')
+                    ->join('flats','maintenance_bills.flat_id','=','flats.id')
+                    ->join('society_members','flats.society_members_id','=','society_members.id')
+                    ->join('maintenances','society_members.society_id','=','maintenances.society_id')
+                    ->select('society_members.*','maintenances.*','maintenance_bills.*','flats.*')->where('maintenance_bills.id',$id)
+                    ->get();
+
+        // $f = new NumberFormatter("en", NumberFormatter::SPELLOUT);
+         return number_format($maintenanceBills[0]->amount);
+         exit();
+
 
         $pdf = PDF::loadView('maintenanceBill.download',compact('maintenanceBills'));
 
-        return $pdf->download('invoice.pdf');
+        return $pdf->download($maintenanceBills[0]->flat_no.$maintenanceBills[0]->due_date.'invoice.pdf');
     }
 
 

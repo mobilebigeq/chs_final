@@ -66,9 +66,8 @@ class PaymentController extends Controller
         
         $society_maintenances = MaintenanceBill::where('society_id',Auth::user()->society_id)->get();
 
-        $society_maintenance_selected = MaintenanceBill::find($society->maintenance_bill_id);
 
-    	return view('payment.edit',compact('society','society_maintenances','society_maintenance_selected'));
+    	return view('payment.edit',compact('society','society_maintenances'));
 
     }
 

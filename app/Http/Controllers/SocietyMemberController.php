@@ -112,15 +112,4 @@ class SocietyMemberController extends Controller
 
     }
 
-
-    public function send(){
-
-        Mail::send(['text'=>'mail'],['name','Kashif'],function($message){
-            $message->to('kashifshaikh440@gmail.com','To Kashif')
-                    ->subject('Test Email')
-                    ->from('kashifshaikh440@gmail.com','Kashif');
-
-        });
-    }
-
 }

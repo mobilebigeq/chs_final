@@ -37,9 +37,12 @@
 
                             <div class="col-md-6">
                                 <select id="maintenance_bill_id" type="text" class="form-control" name="maintenance_bill_id" value="{{ old('maintenance_bill_id') }}" required autofocus>
-                                    <option value="{{$society_maintenance_selected->id}}">{{$society_maintenance_selected->bill_number}}</option>
+                                    
                                     @foreach($society_maintenances as $society_maintenance)
-                                    <option value="{{$society_maintenance->id}}">{{$society_maintenance->bill_number}}</option>
+                                    <option value="{{$society_maintenance->id}}"
+                                    @if($society->maintenance_bill_id == $society_maintenance->id){{"selected"}}
+                                    @endif
+                                    >{{$society_maintenance->bill_number}}</option>
                                     @endforeach
                                 </select>
 

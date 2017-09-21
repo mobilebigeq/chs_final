@@ -51,6 +51,7 @@
                                     <th>Bill Number</th>
                                     <th>Amount</th>
                                     <th>Extra Charge</th>
+                                    <th>Month</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -72,6 +73,10 @@
 
                                 <td>
                                     {{ $maintenanceBill->extra_charge }}
+                                </td>
+
+                                <td>
+                                    {{ $maintenanceBill->month_year}}
                                 </td>
 
                                 <td>

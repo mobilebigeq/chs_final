@@ -37,9 +37,12 @@
 
                             <div class="col-md-6">
                                 <select id="society_members_id" type="text" class="form-control" name="society_members_id" value="{{ old('society_members_id') }}" required autofocus>
-                                <option value="{{$societymembers_selected->id}}">{{$societymembers_selected->full_name}}</option>
+                               
                                 @foreach($societymembers as $societymember)
-                                <option value="{{$societymember->id}}">{{$societymember->full_name}}</option>
+                                <option value="{{$societymember->id}}"
+                                 @if($societyboardmembers->society_members_id == $societymember->id){{"selected"}}
+
+                                 @endif>{{$societymember->full_name}}</option>
                                 @endforeach
                                 </select>
 

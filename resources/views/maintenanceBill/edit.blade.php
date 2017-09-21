@@ -38,9 +38,13 @@
 
                             <div class="col-md-6">
                                 <select id="flat_id" type="text" class="form-control" name="flat_id">
-                                <option value="{{$flats_selected->id}}">{{$flats_selected->flat_no}}</option>
+
                                 @foreach ($flats as $flat)
-                                <option value="{{$flat->id}}">{{$flat->flat_no}}</option>
+                                <option value="{{$flat->id}}"
+                                @if($maintenanceBills->flat_id == $flat->id)
+                                {{"selected"}}
+                                @endif
+                                >{{$flat->flat_no}}</option>
                                 @endforeach
                                 </select>
                                 @if ($errors->has('flat_id'))
@@ -146,6 +150,8 @@
                                 <button type="submit" class="btn btn-primary">
                                     <i class="fa fa-btn fa-ticket"></i> Update
                                 </button>
+
+                                <a href="{{ url('show_maintenance_bills') }}" class="btn btn-danger">Cancel</a>
                             </div>
                         </div>
     

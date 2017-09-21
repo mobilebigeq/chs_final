@@ -130,77 +130,73 @@ tr:nth-child(even) {background-color: #f2f2f2}
 <body>
      <table class="table">
                             <thead>
-
+                             @foreach($maintenanceBills as $maintenanceBill)
                                 <tr>
                                     <th class="custom-header">
                                         {{Auth::user()->society_method->society_name}}
                                     </th>
-                                     <td height="10px">Due Date</td>
-                                    
+                                     <td>Due Date</td>
+                                    <td>
+                                        {{ $maintenanceBill->due_date }}
+                                    </td>
                                 </tr>
                                 <tr>
                                 <th style="background-color: #87bdd8;"></th>
                                     <td height="20px">Bill Number</td>
+                                    <td>{{ $maintenanceBill->bill_number }}</td>
                                 </tr>
                                 <tr>
                                     <th style="background-color: #87bdd8;"></th>
                                     <td height="20px">Amount</td>
+                                    <td>{{ $maintenanceBill->amount }}</td>
+                                </tr>
+
+                                <tr>
+                                    <th>FUll Name</th>
+                                    <td>
+                                    {{ $maintenanceBill->full_name }}
+                                    </td>
+                                    <td></td>
                                 </tr>
 
                                 <tr>
                                     <th>Flat No</th>
                                     <td>
-                                    {{ $maintenanceBills->flats_method->flat_no }}
+                                    {{ $maintenanceBill->flat_no }}
                                     </td>
+                                    <td></td>
                                 </tr>
-                                <tr>
-                                    <th>Bill Number</th>
+
+                                 <tr>
+                                    <th>Rented</th>
                                     <td>
-                                    {{ $maintenanceBills->bill_number }}
+                                    {{ $maintenanceBill->rented }}
                                     </td>
+                                    <td></td>
                                 </tr>
-                                <tr>
-                                    <th>Amount</th>
-                                    <td>
-                                    {{ $maintenanceBills->amount }}
-                                    </td>
-                                </tr>
+                                
+                                
                                 <tr>
                                     <th>Extra Charge</th>
                                     <td>
-                                    {{ $maintenanceBills->extra_charge }}
+                                    {{ $maintenanceBill->extra_charge }}
                                     </td>
+                                    <td></td>
                                 </tr>
-                                <!-- <tr>
-                                    <th>Flat No</th>
-                                    <th>Bill Number</th>
-                                    <th>Amount</th>
-                                    <th>Extra Charge</th>
-                                    
+                                
+                                <tr>
+                                    <th>Extra Charge Amount</th>
+                                    @if($maintenanceBill->extra_charge == "Yes")
+                                    <td>
+                                    {{ $maintenanceBill->charge_amount }}
+                                    </td>
+                                    @else
+                                    <td>{{ "NULL" }}</td>
+                                    @endif
+                                    <td></td>
                                 </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>
-                                @if($maintenanceBills->flats_method !=null)
-                                {{ $maintenanceBills->flats_method->flat_no }}
-                                @endif
-                                </td>
-
-                                <td>
-                                    {{ $maintenanceBills->bill_number }}
-                                </td>
-                                <td>
-                                    {{ $maintenanceBills->amount }}
-                                </td>
-
-                                <td>
-                                    {{ $maintenanceBills->extra_charge }}
-                                </td>
-
-                            </tr>
-                                                            
-                            </tbody> -->
+                                @endforeach
+                                
                         </table>
 </body>
 </html>
