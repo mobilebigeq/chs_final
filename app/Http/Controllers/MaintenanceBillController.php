@@ -13,6 +13,8 @@ use App\SocietyMember;
 use Mail;
 use App\Mail\BillsMail;
 use PDF;
+use NumberToWords\NumberToWords;
+
 
 class MaintenanceBillController extends Controller
 {
@@ -164,20 +166,20 @@ class MaintenanceBillController extends Controller
 
      public function download($id){
 
+        $numberToWords = new NumberToWords();
+        $numberTransformer = $numberToWords->getNumberTransformer('en');
+
 
         $maintenanceBills = DB::table('maintenance_bills')
                     ->join('flats','maintenance_bills.flat_id','=','flats.id')
                     ->join('society_members','flats.society_members_id','=','society_members.id')
                     ->join('maintenances','society_members.society_id','=','maintenances.society_id')
-                    ->select('society_members.*','maintenances.*','maintenance_bills.*','flats.*')->where('maintenance_bills.id',$id)
+                    ->join('societies','maintenance_bills.society_id','=','societies.id')
+                    ->select('society_members.*','maintenances.*','maintenance_bills.*','flats.*','societies.*')->where('maintenance_bills.id',$id)
                     ->get();
 
-        // $f = new NumberFormatter("en", NumberFormatter::SPELLOUT);
-         return number_format($maintenanceBills[0]->amount);
-         exit();
 
-
-        $pdf = PDF::loadView('maintenanceBill.download',compact('maintenanceBills'));
+        $pdf = PDF::loadView('maintenanceBill.download',compact('maintenanceBills','numberTransformer'));
 
         return $pdf->download($maintenanceBills[0]->flat_no.$maintenanceBills[0]->due_date.'invoice.pdf');
     }

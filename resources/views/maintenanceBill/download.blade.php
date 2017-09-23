@@ -137,22 +137,33 @@ tr:nth-child(even) {background-color: #f2f2f2}
                                     </th>
                                      <td>Due Date</td>
                                     <td>
-                                        {{ $maintenanceBill->due_date }}
+                                        {{ $maintenanceBill->due_date.'-'.$maintenanceBill->month_year }}
                                     </td>
                                 </tr>
                                 <tr>
-                                <th style="background-color: #87bdd8;"></th>
+                                <th style="background-color: #87bdd8;">{{ $maintenanceBill->address}}</th>
                                     <td height="20px">Bill Number</td>
                                     <td>{{ $maintenanceBill->bill_number }}</td>
                                 </tr>
                                 <tr>
-                                    <th style="background-color: #87bdd8;"></th>
+                                    <th style="background-color: #87bdd8;">
+                                    Office Number - 
+                                    {{ $maintenanceBill->office_number}}
+                                    </th>
                                     <td height="20px">Amount</td>
                                     <td>{{ $maintenanceBill->amount }}</td>
                                 </tr>
 
                                 <tr>
-                                    <th>FUll Name</th>
+                                    <th>Amount In Words</th>
+                                    <td style="padding-right: 0">
+                                    {{ title_case($numberTransformer->toWords($maintenanceBill->amount)) }}
+                                    </td>
+                                    <td></td>
+                                </tr>
+
+                                <tr>
+                                    <th>Full Name</th>
                                     <td>
                                     {{ $maintenanceBill->full_name }}
                                     </td>
